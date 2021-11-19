@@ -1,6 +1,6 @@
 
   
-@url = http://localhost:3022 
+@url = http://localhost:3016 
 
 ### show all users 
 GET {{url}} 
