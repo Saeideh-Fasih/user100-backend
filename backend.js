@@ -1,9 +1,11 @@
 import express from "express";
 import mongodb, { MongoClient } from "mongodb";
 import cors from "cors";
+// import dotenv from "dotenv";
 
 const app = express();
-const port = 3022;
+const port = process.env.PORT || 3022
+// const port = 3022;
 const mongoConnectString = "mongodb://localhost:27017";
 const client = new MongoClient(mongoConnectString);
 
@@ -68,5 +70,5 @@ app.patch('/edituser/:id', (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`listen on port ${port}`);
+	console.log(`listening on http://localhost:${port}`);
 });
