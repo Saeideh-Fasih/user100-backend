@@ -57,24 +57,6 @@ app.get("/getuser/:id", (req, res) => {
 
 app.patch("/edituser/:id", (req, res) => {
   const id = req.params.id;
-  const name = req.body.name;
-  const username = req.body.username;
-  const email = req.body.email;
-  execMongo(async (db) => {
-    const updateResult = await db
-      .collection("users100")
-      .updateOne(
-        { _id: new mongodb.ObjectId(id) },
-        { $set: { name, username, email } }
-      );
-    res.json({
-      result: updateResult,
-    });
-  });
-});
-
-app.put("/edituser/:id", (req, res) => {
-  const id = req.params.id;
   const email = req.body.email;
   execMongo(async (db) => {
     const updateResult = await db
