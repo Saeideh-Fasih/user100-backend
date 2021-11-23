@@ -5,7 +5,7 @@ import mongodb, { MongoClient } from "mongodb";
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 3030;
+const port = process.env.PORT || 3016;
 const mongoConnectionString = process.env.MONGODB_URI;
 const client = new MongoClient(mongoConnectionString);
 
@@ -18,7 +18,7 @@ const execMongo = async (done) => {
 app.use(express.json());
 app.use(cors());
 
-app.post("/createuser", (req, res) => {
+app.post("/adduser", (req, res) => {
   const user = req.body.user;
   execMongo(async (db) => {
     const insertResult = await db.collection("users100").insertOne(user);
@@ -75,15 +75,13 @@ app.patch("/edituser/:id", (req, res) => {
 
 app.put("/edituser/:id", (req, res) => {
   const id = req.params.id;
-  const name = req.body.name;
-  const username = req.body.username;
   const email = req.body.email;
   execMongo(async (db) => {
     const updateResult = await db
       .collection("users100")
       .updateMany(
         { _id: new mongodb.ObjectId(id) },
-        { $set: { name, username, email } }
+        { $set: { email } }
       );
     res.json({
       result: updateResult,
